@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand OA Exercise Assistant</title>
+    <title>Hand Motion Exercise - Rehably</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,27 +15,113 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1a1a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f0f7f3 0%, #e4f0e9 100%);
             min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Rehably Nav */
+        .rehably-nav {
+            background: white;
+            border-bottom: 3px solid #2d9e5f;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 14px 28px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .rehably-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #2d9e5f;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .rehably-nav-logo svg {
+            width: 36px;
+            height: 36px;
+            color: #2d9e5f;
+        }
+        .rehably-nav-links {
+            display: flex;
+            gap: 28px;
+        }
+        .rehably-nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .rehably-nav-links a:hover { color: #2d9e5f; }
+
+        /* Page header */
+        .page-header {
+            background: linear-gradient(135deg, #1d8a4d 0%, #2d9e5f 60%, #45b373 100%);
+            color: white;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .back-btn {
+            background: rgba(255,255,255,0.18);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            padding: 9px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.28);
+            transform: translateX(-2px);
+        }
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* Main layout */
+        .page-body {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 24px 20px;
         }
 
         .main-container {
             display: flex;
             gap: 20px;
             width: 100%;
-            max-width: 1400px;
             flex-wrap: wrap;
-            justify-content: center;
         }
 
         .section {
             flex: 1;
-            min-width: 350px;
+            min-width: 340px;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2d9e5f;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .bottom-section {
@@ -41,55 +130,27 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .hand-model-container {
             flex: 1;
             min-width: 300px;
-            max-width: 400px;
+            max-width: 420px;
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: 12px;
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .reference-video {
-            position: relative;
-            background: #000;
-            width: 100%;
-            aspect-ratio: 9/16;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .reference-video video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .reference-label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #00FF00;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 12px;
-            z-index: 5;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e8ede9;
         }
 
         .video-container {
             position: relative;
-            background: #000;
+            background: #111;
             width: 100%;
             aspect-ratio: 4/3;
         }
@@ -114,138 +175,158 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 100%);
+            padding: 14px 16px;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
-            max-height: 200px;
+            max-height: 120px;
             overflow-y: auto;
-        }
-
-        .controls {
-            position: relative;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-            z-index: 10;
-        }
-
-        button {
-            padding: 10px 16px;
-            font-size: 14px;
-            font-weight: bold;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        #startBtn {
-            background: #10b981;
-            color: white;
-        }
-
-        #startBtn:hover:not(:disabled) {
-            background: #059669;
-            transform: scale(1.05);
-        }
-
-        #startBtn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        #stopBtn {
-            background: #ef4444;
-            color: white;
-        }
-
-        #stopBtn:hover:not(:disabled) {
-            background: #dc2626;
-            transform: scale(1.05);
-        }
-
-        #stopBtn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            opacity: 0.6;
+            font-weight: 500;
         }
 
         .top-right {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 12px 16px;
-            border-radius: 8px;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(6px);
+            padding: 10px 14px;
+            border-radius: 12px;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 600;
             z-index: 10;
+            line-height: 1.6;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 10px;
+            padding: 14px;
+            background: #f8faf9;
+            border-top: 1px solid #e8ede9;
+        }
+
+        button {
+            padding: 11px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            letter-spacing: 0.2px;
+        }
+
+        #startBtn {
+            flex: 1;
+            background: #2d9e5f;
+            color: white;
+        }
+        #startBtn:hover:not(:disabled) {
+            background: #1d8a4d;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(45,158,95,0.35);
+        }
+        #startBtn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        #stopBtn {
+            flex: 1;
+            background: #ef4444;
+            color: white;
+        }
+        #stopBtn:hover:not(:disabled) {
+            background: #dc2626;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(239,68,68,0.35);
+        }
+        #stopBtn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
         }
 
         .rep-count {
-            font-size: 24px;
+            font-size: 22px;
             color: #10b981;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <div style="background: #2d9e5f; padding: 15px 20px; display: flex; align-items: center; gap: 15px;">
-        <button onclick="goBack()" style="background: #fff; color: #2d9e5f; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px;">
-            ← Back
+    <!-- Rehably Nav -->
+    <header class="rehably-nav">
+        <a href="../index.html" class="rehably-nav-logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <polyline points="30,50 35,50 38,40 42,60 45,50 50,50 55,50 58,40 62,60 65,50 70,50"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Rehably
+        </a>
+        <nav class="rehably-nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../conditions.html">Conditions</a>
+            <a href="../arthritis.html">Arthritis</a>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i> Back
         </button>
-        <h2 style="color: white; margin: 0; flex: 1;">Hand Motion Exercise</h2>
+        <h1><i class="fas fa-hand-paper" style="opacity:0.85; margin-right:8px;"></i>Hand Motion Exercise</h1>
     </div>
 
-    <div class="main-container">
-        <!-- LEFT: Full Webcam View -->
-        <div class="section">
-            <h3 style="color: #fff; text-align: center; margin-bottom: 10px;">📹 Your Hand</h3>
-            <div class="container">
-                <div class="video-container">
-                    <video id="fullVideo" autoplay playsinline></video>
+    <div class="page-body">
+        <div class="main-container">
+            <!-- LEFT: Full Webcam View -->
+            <div class="section">
+                <div class="section-label"><i class="fas fa-video"></i> Your Hand</div>
+                <div class="card">
+                    <div class="video-container">
+                        <video id="fullVideo" autoplay playsinline></video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Tracking with Skeleton & Metrics -->
+            <div class="section">
+                <div class="section-label"><i class="fas fa-crosshairs"></i> Live Tracking</div>
+                <div class="card">
+                    <div class="video-container">
+                        <video id="video" autoplay playsinline style="display: none;"></video>
+                        <canvas id="canvas"></canvas>
+
+                        <div class="top-right">
+                            <div>Rep <span id="repCounter">0</span>/<span id="repGoal">8</span></div>
+                            <div>Hold: <span id="holdTime">0.0</span>s</div>
+                        </div>
+
+                        <div class="overlay" id="feedbackOverlay">
+                            <div id="feedback">Ready to start. Click Start button.</div>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button id="startBtn"><i class="fas fa-play"></i> Start</button>
+                        <button id="stopBtn" disabled><i class="fas fa-stop"></i> Stop</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT: Tracking with Skeleton & Metrics -->
-        <div class="section">
-            <h3 style="color: #fff; text-align: center; margin-bottom: 10px;">🎯 Live Tracking</h3>
-            <div class="controls">
-                <button id="startBtn">Start</button>
-                <button id="stopBtn" disabled>Stop</button>
-            </div>
-            <div class="container">
-                <div class="video-container">
-                    <video id="video" autoplay playsinline style="display: none;"></video>
-                    <canvas id="canvas"></canvas>
-
-                    <div class="top-right">
-                        <div style="font-size: 12px; margin-bottom: 8px;">Rep <span id="repCounter">0</span>/<span id="repGoal">8</span></div>
-                        <div style="font-size: 12px;">Hold: <span id="holdTime">0.0</span>s</div>
-                    </div>
-
-                    <div class="overlay" id="feedbackOverlay">
-                        <div id="feedback">Ready to start. Click Start button.</div>
-                    </div>
+        <!-- BOTTOM: Hand Model Indicator -->
+        <div class="bottom-section">
+            <div class="hand-model-container">
+                <div class="section-label" style="justify-content: center;"><i class="fas fa-hand"></i> Target Area</div>
+                <div class="card">
+                    <canvas id="handModel" style="width: 100%; height: 100%; min-height: 300px; display: block;"></canvas>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- BOTTOM: Hand Model Indicator -->
-    <div class="bottom-section" style="margin-top: 20px;">
-        <div class="hand-model-container">
-            <h3 style="color: #fff; text-align: center; margin-bottom: 10px;">✋ Target Area</h3>
-            <div class="container">
-                <canvas id="handModel" style="width: 100%; height: 100%; min-height: 300px;"></canvas>
             </div>
         </div>
     </div>

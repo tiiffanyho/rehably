@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sit-to-Stand Exercise - Rehably</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -13,51 +15,96 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background: linear-gradient(135deg, #f5faf8 0%, #e8f3ed 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f0f7f3 0%, #e4f0e9 100%);
             min-height: 100vh;
             padding: 0;
+        }
+
+        /* Rehably top nav */
+        .rehably-nav {
+            background: white;
+            border-bottom: 3px solid #2d9e5f;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .rehably-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #2d9e5f;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .rehably-nav-logo svg {
+            width: 38px;
+            height: 38px;
+            color: #2d9e5f;
+        }
+        .rehably-nav-links {
+            display: flex;
+            gap: 28px;
+        }
+        .rehably-nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .rehably-nav-links a:hover {
+            color: #2d9e5f;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px 20px;
         }
 
         .header {
-            background: #2d9e5f;
+            background: linear-gradient(135deg, #1d8a4d 0%, #2d9e5f 60%, #45b373 100%);
             color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+            padding: 22px 28px;
+            border-radius: 20px;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
             gap: 20px;
-            box-shadow: 0 4px 12px rgba(45, 158, 95, 0.2);
+            box-shadow: 0 8px 28px rgba(45, 158, 95, 0.35);
         }
 
         .header button {
-            background: white;
-            color: #2d9e5f;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
             padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.45);
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 14px;
-            transition: all 0.3s;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .header button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateX(-2px);
         }
 
         .header h1 {
             flex: 1;
-            font-size: 28px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .content-grid {
@@ -69,15 +116,15 @@
 
         .section {
             background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e0e0e0;
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e8ede9;
         }
 
         .section h2 {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             margin-bottom: 15px;
             color: #2d9e5f;
         }
@@ -85,11 +132,12 @@
         .video-container {
             position: relative;
             width: 100%;
-            background: #000;
-            border-radius: 8px;
+            background: #111;
+            border-radius: 12px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
         }
 
         video, canvas {
@@ -112,13 +160,15 @@
 
         .btn-start, .btn-stop {
             flex: 1;
-            padding: 12px 20px;
+            padding: 13px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            font-family: inherit;
+            letter-spacing: 0.2px;
         }
 
         .btn-start {
@@ -154,15 +204,17 @@
         }
 
         .status-bar {
-            background: #f5faf8;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-top: 15px;
+            background: #f0f7f3;
+            border: 1px solid #d4e8db;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 14px;
             font-size: 13px;
-            color: #666;
+            color: #555;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 500;
         }
 
         .status-indicator {
@@ -188,77 +240,110 @@
         }
 
         .metric {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
+            background: white;
+            padding: 16px 12px;
+            border-radius: 14px;
             text-align: center;
-            border-left: 4px solid #2d9e5f;
+            border: 1px solid #e4ede7;
+            box-shadow: 0 2px 8px rgba(45, 158, 95, 0.07);
+            transition: transform 0.2s;
+        }
+
+        .metric:hover {
+            transform: translateY(-2px);
+        }
+
+        .metric-icon {
+            font-size: 18px;
+            color: #2d9e5f;
+            margin-bottom: 6px;
+            opacity: 0.75;
         }
 
         .metric-label {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 6px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .metric-value {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
             color: #2d9e5f;
         }
 
         .feedback {
-            background: #e8f5e9;
-            border: 1px solid #c8e6c9;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, #e8f5e9, #f0faf2);
+            border: 1px solid #a5d6a7;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 14px;
+            max-height: 420px;
+            overflow-y: auto;
         }
 
         .feedback-title {
-            font-weight: 600;
+            font-weight: 700;
             color: #1b5e20;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .feedback-text {
             font-size: 13px;
             color: #2d5016;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .info-box {
-            background: #fef3c7;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
             border: 1px solid #fcd34d;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
             font-size: 13px;
             color: #92400e;
             line-height: 1.6;
         }
 
         .info-box strong {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             margin-bottom: 8px;
             color: #78350f;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .safety-alert {
-            background: #fee2e2;
+            background: linear-gradient(135deg, #fff5f5, #fee2e2);
             border: 1px solid #fca5a5;
-            border-radius: 8px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 16px;
             font-size: 13px;
             color: #7f1d1d;
             line-height: 1.6;
         }
 
         .safety-alert strong {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             margin-bottom: 8px;
             color: #991b1b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .recording-indicator {
@@ -334,18 +419,35 @@
     </style>
 </head>
 <body>
+    <!-- Rehably Nav -->
+    <header class="rehably-nav">
+        <a href="index.html" class="rehably-nav-logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <polyline points="30,50 35,50 38,40 42,60 45,50 50,50 55,50 58,40 62,60 65,50 70,50"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Rehably
+        </a>
+        <nav class="rehably-nav-links">
+            <a href="index.html">Home</a>
+            <a href="conditions.html">Conditions</a>
+            <a href="arthritis.html">Arthritis</a>
+        </nav>
+    </header>
+
     <div class="container">
         <div class="header">
-            <button id="sitStandBackBtn">
+            <button id="sitStandBackBtn" onclick="window.location.href='arthritis.html'">
                 <i class="fas fa-arrow-left"></i> Back
             </button>
-            <h1>Sit-to-Stand Exercise</h1>
+            <h1><i class="fas fa-person" style="opacity:0.85; margin-right:8px;"></i>Sit-to-Stand Exercise</h1>
             <div></div>
         </div>
 
         <div class="content-grid">
             <div class="section">
-                <h2>Your Motion</h2>
+                <h2><i class="fas fa-video" style="color:#2d9e5f; margin-right:8px;"></i>Your Motion</h2>
                 <div class="video-container">
                     <video id="sitStandVideo" autoplay playsinline></video>
                     <canvas id="sitStandCanvas"></canvas>
@@ -365,41 +467,45 @@
             </div>
 
             <div class="section">
-                <h2>Exercise Tracking</h2>
+                <h2><i class="fas fa-chart-line" style="color:#2d9e5f; margin-right:8px;"></i>Exercise Tracking</h2>
                 
                 <div class="metrics-grid">
                     <div class="metric">
-                        <div class="metric-label">Reps Counted</div>
+                        <div class="metric-icon"><i class="fas fa-rotate"></i></div>
+                        <div class="metric-label">Reps</div>
                         <div class="metric-value" id="repsCount">0</div>
                     </div>
                     <div class="metric">
+                        <div class="metric-icon"><i class="fas fa-clock"></i></div>
                         <div class="metric-label">Duration</div>
                         <div class="metric-value" id="duration">0s</div>
                     </div>
                     <div class="metric">
+                        <div class="metric-icon"><i class="fas fa-angle-left"></i></div>
                         <div class="metric-label">Left Knee</div>
                         <div class="metric-value" id="lKnee">--°</div>
                     </div>
                     <div class="metric">
+                        <div class="metric-icon"><i class="fas fa-angle-right"></i></div>
                         <div class="metric-label">Right Knee</div>
                         <div class="metric-value" id="rKnee">--°</div>
                     </div>
                 </div>
 
                 <div class="feedback" id="feedbackBox">
-                    <div class="feedback-title">Live Feedback</div>
+                    <div class="feedback-title"><i class="fas fa-comment-medical"></i> Live Feedback</div>
                     <div class="feedback-text" id="feedbackText">
                         Stand 2 meters from camera with full body visible. Good lighting is important.
                     </div>
                 </div>
 
                 <div class="info-box">
-                    <strong>Safe Exercise Guidelines:</strong>
-                    Knee bend target: 90-110 degrees. Move slowly and steadily. Keep knees balanced. Stop if you feel pain.
+                    <strong><i class="fas fa-circle-info"></i> Safe Exercise Guidelines</strong>
+                    Knee bend target: 90–110 degrees. Move slowly and steadily. Keep knees balanced. Stop if you feel pain.
                 </div>
 
                 <div class="safety-alert">
-                    <strong>Important Safety Notice</strong>
+                    <strong><i class="fas fa-triangle-exclamation"></i> Important Safety Notice</strong>
                     This tool is NOT medical advice. Always consult your doctor before starting exercises.
                 </div>
             </div>
@@ -439,9 +545,13 @@
                     numPoses: 1
                 });
                 
-                document.getElementById('statusText').textContent = 'Ready. Center yourself in frame.';
                 document.getElementById('statusIndicator').classList.add('good');
-                document.getElementById('sitStandStartBtn').disabled = false;
+                if (videoReady) {
+                    document.getElementById('statusText').textContent = 'Ready. Center yourself in frame.';
+                    document.getElementById('sitStandStartBtn').disabled = false;
+                } else {
+                    document.getElementById('statusText').textContent = 'Model ready. Waiting for camera...';
+                }
                 
                 console.log('MediaPipe loaded');
             } catch (error) {
@@ -453,25 +563,29 @@
 
         async function startCamera() {
             try {
-                if (!poseDetector) {
-                    document.getElementById('statusText').textContent = 'Model loading...';
-                    return;
-                }
-
                 document.getElementById('statusText').textContent = 'Requesting camera...';
-                
+
                 mediaStream = await navigator.mediaDevices.getUserMedia({
                     video: { width: { ideal: 960 }, height: { ideal: 540 }, facingMode: 'user' },
                     audio: false
                 });
 
                 videoElement.srcObject = mediaStream;
-                
+
                 await new Promise((resolve) => {
                     videoElement.onloadedmetadata = async () => {
                         await videoElement.play();
+                        // Size the canvas to match the actual video stream
+                        canvasElement.width = videoElement.videoWidth || videoElement.offsetWidth;
+                        canvasElement.height = videoElement.videoHeight || videoElement.offsetHeight;
                         videoReady = true;
-                        document.getElementById('statusText').textContent = 'Camera ready. Click Start to record.';
+                        if (poseDetector) {
+                            document.getElementById('statusText').textContent = 'Ready. Center yourself in frame.';
+                            document.getElementById('sitStandStartBtn').disabled = false;
+                            document.getElementById('statusIndicator').classList.add('good');
+                        } else {
+                            document.getElementById('statusText').textContent = 'Camera ready. Model still loading...';
+                        }
                         resolve();
                     };
                 });
@@ -897,8 +1011,8 @@ Format with HTML tags. Use medical terminology but ensure clarity. Include speci
                 padding: 0;
             }
         }
-    </style>
-</head>
+    <\/style>
+<\/head>
 <body>
     <div class="container">
         <div class="header">
@@ -950,8 +1064,8 @@ Format with HTML tags. Use medical terminology but ensure clarity. Include speci
             <p>Report ID: ${Date.now()} | Generated by Rehably Exercise Tracker</p>
         </div>
     </div>
-</body>
-</html>
+<\/body>
+<\/html>
             `;
             
             const blob = new Blob([htmlContent], { type: 'text/html' });
@@ -1085,17 +1199,14 @@ Format with HTML tags. Use medical terminology but ensure clarity. Include speci
             stopBtn.addEventListener('click', stopRecording);
             backBtn.addEventListener('click', () => window.history.back());
 
-            canvasElement.width = videoElement.offsetWidth;
-            canvasElement.height = videoElement.offsetHeight;
-
-            await initMediaPipe();
-            await startCamera();
+            // Start camera and load model in parallel so camera shows immediately
+            await Promise.all([startCamera(), initMediaPipe()]);
         });
 
         window.addEventListener('resize', () => {
-            if (videoElement && canvasElement) {
-                canvasElement.width = videoElement.offsetWidth;
-                canvasElement.height = videoElement.offsetHeight;
+            if (videoElement && canvasElement && videoReady) {
+                canvasElement.width = videoElement.videoWidth || videoElement.offsetWidth;
+                canvasElement.height = videoElement.videoHeight || videoElement.offsetHeight;
             }
         });
     </script>
