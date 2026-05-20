@@ -144,33 +144,3 @@ Webcam frame → MediaPipe Hands (WASM) → 21 hand landmarks
 | Hypertension | Cardio & breathing exercises | Planned |
 | Sarcopenia | Resistance & functional training | Planned |
 
----
-
-## Browser Requirements
-
-- Chrome or Edge (recommended — best WebAssembly and Speech API support)
-- Webcam access must be granted
-- Internet connection required on first load to fetch MediaPipe model files from CDN
-
----
-
-## Privacy
-
-All motion tracking runs entirely client-side in the browser via WebAssembly. No video or landmark data is sent to any server. The only outbound network call is to the OpenAI API at session end, which sends anonymized exercise statistics (rep count, duration, hold times) to generate the summary.
-
----
-
-## Healthcare Partners
-
-Rehably is designed in collaboration with:
-
-- London Health Sciences Centre
-- St. Joseph's Hospital
-- Victoria Hospital
-- Parkwood Institute
-
----
-
-## License
-
-&copy; 2025 Rehably. All rights reserved.
