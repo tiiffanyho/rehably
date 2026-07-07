@@ -20,6 +20,7 @@ Rehably is a browser-based rehabilitation platform designed to help seniors and 
 
 ## Project Structure
 
+Design : https://www.figma.com/design/7X7bczaY0O6gDtwFbzUFof/Rehably?node-id=8-95&t=98pFIruPfXGsT8TL-1
 ```
 rehably/
 ├── index.html                  # Landing page
