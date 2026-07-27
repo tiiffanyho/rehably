@@ -1,12 +1,7 @@
-# Rehably — Personal AI Rehab Support
-
-Rehably is a browser-based rehabilitation platform designed to help seniors and patients recover at home. It uses real-time AI-powered motion tracking to guide users through therapeutic exercises, give live form feedback, and generate downloadable session summaries.
-
----
+# Rehably - Personal AI Rehab Support
 
 ## Features
-
-- **Condition-specific exercise programs** — Users select their condition (arthritis, stroke recovery, osteoporosis, dementia, hypertension, sarcopenia) and are guided to the appropriate exercise module.
+- **Condition-specific exercise programs** Users select their condition (arthritis, stroke recovery, osteoporosis, dementia, hypertension, sarcopenia) and are guided to the appropriate exercise module.
 - **Real-time hand tracking** — Uses MediaPipe Hands via WebAssembly to detect hand landmarks at 30+ fps directly in the browser. No server required for motion tracking.
 - **Live form feedback** — Voice alerts (Web Speech API) correct posture in real time:
   - Wrist tilt and internal bend detection
